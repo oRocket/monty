@@ -1,25 +1,21 @@
 #include "monty.h"
-
 /**
- * pall - Print all elements on the stack.
- * @head: Double pointer to the stack.
- * @line_number: The line number in the file.
+ * f_pall - prints the stack
+ * @head: stack head
+ * @counter: no used
+ * Return: no return
  */
-void pall(stack_t **head, unsigned int line_number)
+void f_pall(stack_t **head, unsigned int counter)
 {
-	stack_t *tmp = NULL;
+	stack_t *h;
+	(void)counter;
 
-	if (!head || !*head)
+	h = *head;
+	if (h == NULL)
+		return;
+	while (h)
 	{
-		return; /* Nothing to print if the stack is empty. */
-	}
-
-	(void)line_number; /* Unused variable, just silence the compiler warning. */
-
-	tmp = *head;
-
-	for (; tmp != NULL; tmp = tmp->next)
-	{
-		printf("%d\n", tmp->n);
+		printf("%d\n", h->n);
+		h = h->next;
 	}
 }

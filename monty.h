@@ -1,17 +1,12 @@
-#ifndef _MONTY_H_
-#define _MONTY_H_
-
+#ifndef MONTY_H
+#define MONTY_H
 #include <stdio.h>
-#include <string.h>
-#include <unistd.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <sys/types.h>
-#include <sys/stat.h>
+#include <unistd.h>
 #include <fcntl.h>
-
-/* data structures */
-
+#include <string.h>
+#include <ctype.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -27,9 +22,24 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
-
 /**
- * struct instruction_s - opcoode and its function
+ * struct bus_s - variables -args, file, line content
+ * @arg: value
+ * @file: pointer to monty file
+ * @content: line content
+ * @lifi: flag change stack <-> queue
+ * Description: carries values through the program
+ */
+typedef struct bus_s
+{
+	char *arg;
+	FILE *file;
+	char *content;
+	int lifi;
+}  bus_t;
+extern bus_t bus;
+/**
+ * struct instruction_s - opcode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
  *
@@ -41,31 +51,28 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-
-/* opcodes related prototypes */
-void (*get_function(char *token1))(stack_t **stack, unsigned int line_number);
-void push(stack_t **head, unsigned int line_number, const char *n);
-void pall(stack_t **head, unsigned int line_number);
-void pchar(stack_t **head, unsigned int line_number);
-void pint(stack_t **head, unsigned int line_number);
-void pop(stack_t **head, unsigned int line_number);
-void my_swap(stack_t **head, unsigned int line_number);
-void rotl(stack_t **head, unsigned int line_number);
-void nop(stack_t **head, unsigned int line_number);
-void rotr(stack_t **head, unsigned int line_number);
-void pstr(stack_t **head, unsigned int line_number);
-int is_integer(const char *n);
-
-/* calculator prototypes */
-void my_add(stack_t **head, unsigned int line_number);
-void my_sub(stack_t **head, unsigned int line_number);
-void my_mul(stack_t **head, unsigned int line_number);
-void my_div(stack_t **head, unsigned int line_number);
-void my_mod(stack_t **head, unsigned int line_number);
-
-/* doubly linked list related prototypes */
-int node_add(stack_t **head, int n);
-void node_del(stack_t **head);
-void free_stack(stack_t **head);
-
-#endif /* monty.h */
+char *_realloc(char *ptr, unsigned int old_size, unsigned int new_size);
+ssize_t getstdin(char **lineptr, int file);
+char  *clean_line(char *content);
+void f_push(stack_t **head, unsigned int number);
+void f_pall(stack_t **head, unsigned int number);
+void f_pint(stack_t **head, unsigned int number);
+int execute(char *content, stack_t **head, unsigned int counter, FILE *file);
+void free_stack(stack_t *head);
+void f_pop(stack_t **head, unsigned int counter);
+void f_swap(stack_t **head, unsigned int counter);
+void f_add(stack_t **head, unsigned int counter);
+void f_nop(stack_t **head, unsigned int counter);
+void f_sub(stack_t **head, unsigned int counter);
+void f_div(stack_t **head, unsigned int counter);
+void f_mul(stack_t **head, unsigned int counter);
+void f_mod(stack_t **head, unsigned int counter);
+void f_pchar(stack_t **head, unsigned int counter);
+void f_pstr(stack_t **head, unsigned int counter);
+void f_rotl(stack_t **head, unsigned int counter);
+void f_rotr(stack_t **head, __attribute__((unused)) unsigned int counter);
+void addnode(stack_t **head, int n);
+void addqueue(stack_t **head, int n);
+void f_queue(stack_t **head, unsigned int counter);
+void f_stack(stack_t **head, unsigned int counter);
+#endif

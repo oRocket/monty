@@ -1,26 +1,26 @@
 #include "monty.h"
-
 /**
- * rotr - Rotate the stack so that the bottom node becomes the first one.
- * @head: Pointer to the head of the stack.
- * @line_number: Line number (not used).
+ *f_rotr- rotates the stack to the bottom
+ *@head: stack head
+ *@counter: line_number
+ *Return: no return
  */
-void rotr(stack_t **head, unsigned int line_number)
+void f_rotr(stack_t **head, __attribute__((unused)) unsigned int counter)
 {
-	stack_t *tmp;
+	stack_t *copy;
 
-	(void)line_number;
-
-	if ((*head)->next != NULL)
+	copy = *head;
+	if (*head == NULL || (*head)->next == NULL)
 	{
-		tmp = *head;
-		for (; tmp->next != NULL; tmp = tmp->next)
-			continue;
-
-		(*head)->prev = tmp;
-		tmp->next = *head;
-		tmp->prev->next = NULL;
-		tmp->prev = NULL;
-		(*head) = (*head)->prev;
+		return;
 	}
+	while (copy->next)
+	{
+		copy = copy->next;
+	}
+	copy->next = *head;
+	copy->prev->next = NULL;
+	copy->prev = NULL;
+	(*head)->prev = copy;
+	(*head) = copy;
 }

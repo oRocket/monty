@@ -1,23 +1,41 @@
 #include "monty.h"
-
 /**
- * my_mod - Compute the modulus of the second node from the top node.
- * @head: Pointer to the top of the stack.
- * @line_number: Line number of the command.
+ * f_mod - computes the rest of the division of the second
+ * top element of the stack by the top element of the stack
+ * @head: stack head
+ * @counter: line_number
+ * Return: no return
  */
-void my_mod(stack_t **head, unsigned int line_number)
+void f_mod(stack_t **head, unsigned int counter)
 {
-	if (head == NULL || *head == NULL)
+	stack_t *h;
+	int len = 0, aux;
+
+	h = *head;
+	while (h)
 	{
-		printf("L%u: can't mod, stack too short\n", line_number);
+		h = h->next;
+		len++;
+	}
+	if (len < 2)
+	{
+		fprintf(stderr, "L%d: can't mod, stack too short\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	if ((*head)->n == 0 || (*head)->next->n == 0)
+	h = *head;
+	if (h->n == 0)
 	{
-		printf("L%u: division by zero\n", line_number);
+		fprintf(stderr, "L%d: division by zero\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
 	}
-	(*head)->next->n %= (*head)->n;
-	(*head) = (*head)->next;
-	free((*head)->prev);
-	(*head)->prev = NULL;
+	aux = h->next->n % h->n;
+	h->next->n = aux;
+	*head = h->next;
+	free(h);
 }

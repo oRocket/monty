@@ -1,21 +1,23 @@
 #include "monty.h"
-
 /**
- * pop - Remove the top element from the stack.
- * @head: Double pointer to the stack.
- * @line_number: The line number in the file.
+ * f_pop - prints the top
+ * @head: stack head
+ * @counter: line_number
+ * Return: no return
  */
-void pop(stack_t **head, unsigned int line_number)
+void f_pop(stack_t **head, unsigned int counter)
 {
-	/* Check if the stack is empty */
-	if (head == NULL || *head == NULL)
+	stack_t *h;
+
+	if (*head == NULL)
 	{
-		printf("L%u: can't pop an empty stack\n", line_number);
-		free_stack(head); /* Free the stack and its nodes */
-		exit(EXIT_FAILURE); /* Exit with an error status */
+		fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		node_del(head); /* Remove the top node from the stack */
-	}
+	h = *head;
+	*head = h->next;
+	free(h);
 }
