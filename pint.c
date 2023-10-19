@@ -1,9 +1,15 @@
 #include "monty.h"
+
 /**
- * f_pint - prints the top
- * @head: stack head
- * @counter: line_number
- * Return: no return
+ * f_pint - Prints the value of the top
+ * element of the stack, followed by a new line.
+ * @head: Double pointer to the stack (head).
+ * @counter: The line number in the file.
+ *
+ * This function prints the integer value
+ * of the top element of the stack.
+ * It checks for an empty stack and
+ * prints an error message in that case.
  */
 void f_pint(stack_t **head, unsigned int counter)
 {
