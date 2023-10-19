@@ -5,9 +5,9 @@
  * @head: Double pointer to the head of the stack.
  * @n: New value to be added.
  *
- * This function allocates memory 
+ * This function allocates memory
  * for a new node and adds it to the end of the stack.
- * If the stack is empty, 
+ * If the stack is empty,
  * it sets the new node as the head of the stack.
  */
 void addqueue(stack_t **head, int n)

@@ -4,9 +4,6 @@
  * f_div - Divides the top two elements of the stack.
  * @head: Double pointer to the stack (head).
  * @counter: The line number in the file.
- *
- * This function divides the second element from the top of the stack by the top
- * element, and replaces the second element with the result.
  */
 void f_div(stack_t **head, unsigned int counter)
 {

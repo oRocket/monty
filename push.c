@@ -5,9 +5,9 @@
  * @head: Double pointer to the stack (head).
  * @counter: The line number in the file.
  *
- * This function parses the argument 
+ * This function parses the argument
  * and adds a new node to the stack with the
- * specified integer value. 
+ * specified integer value.
  * It performs argument validation to ensure it's an integer.
  */
 void f_push(stack_t **head, unsigned int counter)

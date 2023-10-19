@@ -5,7 +5,7 @@
  * @head: Double pointer to the stack (head).
  * @counter: The line number in the file (unused).
  *
- * This function rotates the stack, 
+ * This function rotates the stack,
  * moving the top element to the bottom,
  * making the second element the new top.
  */

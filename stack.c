@@ -5,7 +5,7 @@
  * @head: Double pointer to the stack (head).
  * @counter: The line number in the file.
  *
- * This function sets the stack mode, 
+ * This function sets the stack mode,
  * indicating that subsequent operations
  * will treat the stack as a stack (LIFO - Last In, First Out).
  */
