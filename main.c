@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	unsigned int line = 1;
 	ssize_t n_read;
 	char *buffer, *token;
-	stack_t *h = NULL;
+	stack_t *head = NULL;
 
 	if (argc != 2)
 	{
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	{
 		if (ispush == 1)
 		{
-			push(&h, line, token);
+			push(&head, line, token);
 			ispush = 0;
 			line++;
 			continue;
@@ -54,18 +54,18 @@ int main(int argc, char *argv[])
 		{
 			if (get_function(token) != 0)
 			{
-				get_function(token)(&h, line);
+				get_function(token)(&head, line);
 			}
 			else
 			{
-				free_stack(&h);
+				free_stack(&head);
 				printf("L%d: unknown instruction %s\n", line, token);
 				exit(EXIT_FAILURE);
 			}
 		}
 		line++;
 	}
-	free_stack(&h);
+	free_stack(&head);
 	free(buffer);
 	close(fd);
 	return (0);
